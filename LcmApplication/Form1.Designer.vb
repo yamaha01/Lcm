@@ -26,6 +26,16 @@ Partial Class frmMainLcm
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JournalVouchersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountBalanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountBudgetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BankBookToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OtherPaymentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OtherDepositToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.PurchaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeliveryOrdersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -34,6 +44,12 @@ Partial Class frmMainLcm
         Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActivityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneralLedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.JournalVoucherToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CashAndBankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OtherPaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OtherDepositToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BankReconcileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,22 +61,6 @@ Partial Class frmMainLcm
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnGeneralLedger = New System.Windows.Forms.Button()
-        Me.GeneralLedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CashAndBankToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.JournalVoucherToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OtherPaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OtherDepositToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BankReconcileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BankBookToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OtherPaymentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OtherDepositToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.JournalVouchersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountBudgetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AccountBalanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -78,21 +78,82 @@ Partial Class frmMainLcm
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F"
         Me.FileToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
         'SetupToolStripMenuItem
         '
         Me.SetupToolStripMenuItem.Name = "SetupToolStripMenuItem"
-        Me.SetupToolStripMenuItem.Size = New System.Drawing.Size(47, 20)
+        Me.SetupToolStripMenuItem.Size = New System.Drawing.Size(49, 20)
         Me.SetupToolStripMenuItem.Text = "Setu&p"
         '
         'ListToolStripMenuItem
         '
         Me.ListToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripSeparator1, Me.PurchaseToolStripMenuItem, Me.PurchasesToolStripMenuItem})
         Me.ListToolStripMenuItem.Name = "ListToolStripMenuItem"
-        Me.ListToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.ListToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.ListToolStripMenuItem.Text = "&List"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JournalVouchersToolStripMenuItem, Me.AccountHistoryToolStripMenuItem, Me.AccountBalanceToolStripMenuItem, Me.AccountBudgetToolStripMenuItem})
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(164, 22)
+        Me.ToolStripMenuItem1.Text = "&General Ledger"
+        '
+        'JournalVouchersToolStripMenuItem
+        '
+        Me.JournalVouchersToolStripMenuItem.Name = "JournalVouchersToolStripMenuItem"
+        Me.JournalVouchersToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.JournalVouchersToolStripMenuItem.Text = "&Journal Vouchers"
+        '
+        'AccountHistoryToolStripMenuItem
+        '
+        Me.AccountHistoryToolStripMenuItem.Name = "AccountHistoryToolStripMenuItem"
+        Me.AccountHistoryToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.AccountHistoryToolStripMenuItem.Text = "Account &History"
+        '
+        'AccountBalanceToolStripMenuItem
+        '
+        Me.AccountBalanceToolStripMenuItem.Name = "AccountBalanceToolStripMenuItem"
+        Me.AccountBalanceToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.AccountBalanceToolStripMenuItem.Text = "Account &Balance"
+        '
+        'AccountBudgetToolStripMenuItem
+        '
+        Me.AccountBudgetToolStripMenuItem.Name = "AccountBudgetToolStripMenuItem"
+        Me.AccountBudgetToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.AccountBudgetToolStripMenuItem.Text = "&Account Budget"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BankBookToolStripMenuItem, Me.OtherPaymentToolStripMenuItem1, Me.OtherDepositToolStripMenuItem1})
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(164, 22)
+        Me.ToolStripMenuItem2.Text = "&Cash && Bank"
+        '
+        'BankBookToolStripMenuItem
+        '
+        Me.BankBookToolStripMenuItem.Name = "BankBookToolStripMenuItem"
+        Me.BankBookToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.BankBookToolStripMenuItem.Text = "&Bank Book"
+        '
+        'OtherPaymentToolStripMenuItem1
+        '
+        Me.OtherPaymentToolStripMenuItem1.Name = "OtherPaymentToolStripMenuItem1"
+        Me.OtherPaymentToolStripMenuItem1.Size = New System.Drawing.Size(154, 22)
+        Me.OtherPaymentToolStripMenuItem1.Text = "Other &Payment"
+        '
+        'OtherDepositToolStripMenuItem1
+        '
+        Me.OtherDepositToolStripMenuItem1.Name = "OtherDepositToolStripMenuItem1"
+        Me.OtherDepositToolStripMenuItem1.Size = New System.Drawing.Size(154, 22)
+        Me.OtherDepositToolStripMenuItem1.Text = "Other &Deposit"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(161, 6)
         '
         'PurchaseToolStripMenuItem
         '
@@ -100,37 +161,37 @@ Partial Class frmMainLcm
         Me.PurchaseToolStripMenuItem.Name = "PurchaseToolStripMenuItem"
         Me.PurchaseToolStripMenuItem.ShortcutKeyDisplayString = "Alt+S"
         Me.PurchaseToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.PurchaseToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.PurchaseToolStripMenuItem.Text = "&Sales"
         '
         'SToolStripMenuItem
         '
         Me.SToolStripMenuItem.Name = "SToolStripMenuItem"
-        Me.SToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.SToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.SToolStripMenuItem.Text = "Sales &Orders"
         '
         'DeliveryOrdersToolStripMenuItem
         '
         Me.DeliveryOrdersToolStripMenuItem.Name = "DeliveryOrdersToolStripMenuItem"
-        Me.DeliveryOrdersToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.DeliveryOrdersToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.DeliveryOrdersToolStripMenuItem.Text = "&Delivery Orders"
         '
         'SalesInvoicesToolStripMenuItem
         '
         Me.SalesInvoicesToolStripMenuItem.Name = "SalesInvoicesToolStripMenuItem"
-        Me.SalesInvoicesToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.SalesInvoicesToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.SalesInvoicesToolStripMenuItem.Text = "&Sales Invoices"
         '
         'SalesReturnsToolStripMenuItem
         '
         Me.SalesReturnsToolStripMenuItem.Name = "SalesReturnsToolStripMenuItem"
-        Me.SalesReturnsToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.SalesReturnsToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.SalesReturnsToolStripMenuItem.Text = "Sales &Returns"
         '
         'CustomerToolStripMenuItem
         '
         Me.CustomerToolStripMenuItem.Name = "CustomerToolStripMenuItem"
-        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
+        Me.CustomerToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.CustomerToolStripMenuItem.Text = "&Customer Receipts"
         '
         'PurchasesToolStripMenuItem
@@ -138,45 +199,83 @@ Partial Class frmMainLcm
         Me.PurchasesToolStripMenuItem.Name = "PurchasesToolStripMenuItem"
         Me.PurchasesToolStripMenuItem.ShortcutKeyDisplayString = "Alt+R"
         Me.PurchasesToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.PurchasesToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.PurchasesToolStripMenuItem.Size = New System.Drawing.Size(164, 22)
         Me.PurchasesToolStripMenuItem.Text = "Pu&rchases"
         '
         'ActivityToolStripMenuItem
         '
         Me.ActivityToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralLedgerToolStripMenuItem, Me.CashAndBankToolStripMenuItem})
         Me.ActivityToolStripMenuItem.Name = "ActivityToolStripMenuItem"
-        Me.ActivityToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ActivityToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.ActivityToolStripMenuItem.Text = "&Activities"
+        '
+        'GeneralLedgerToolStripMenuItem
+        '
+        Me.GeneralLedgerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JournalVoucherToolStripMenuItem})
+        Me.GeneralLedgerToolStripMenuItem.Name = "GeneralLedgerToolStripMenuItem"
+        Me.GeneralLedgerToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.GeneralLedgerToolStripMenuItem.Text = "&General Ledger"
+        '
+        'JournalVoucherToolStripMenuItem
+        '
+        Me.JournalVoucherToolStripMenuItem.Name = "JournalVoucherToolStripMenuItem"
+        Me.JournalVoucherToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.JournalVoucherToolStripMenuItem.Text = "&Journal Voucher"
+        '
+        'CashAndBankToolStripMenuItem
+        '
+        Me.CashAndBankToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OtherPaymentToolStripMenuItem, Me.OtherDepositToolStripMenuItem, Me.BankReconcileToolStripMenuItem})
+        Me.CashAndBankToolStripMenuItem.Name = "CashAndBankToolStripMenuItem"
+        Me.CashAndBankToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CashAndBankToolStripMenuItem.Text = "&Cash and Bank"
+        '
+        'OtherPaymentToolStripMenuItem
+        '
+        Me.OtherPaymentToolStripMenuItem.Name = "OtherPaymentToolStripMenuItem"
+        Me.OtherPaymentToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OtherPaymentToolStripMenuItem.Text = "&Other Payment"
+        '
+        'OtherDepositToolStripMenuItem
+        '
+        Me.OtherDepositToolStripMenuItem.Name = "OtherDepositToolStripMenuItem"
+        Me.OtherDepositToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OtherDepositToolStripMenuItem.Text = "O&ther Deposit"
+        '
+        'BankReconcileToolStripMenuItem
+        '
+        Me.BankReconcileToolStripMenuItem.Name = "BankReconcileToolStripMenuItem"
+        Me.BankReconcileToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.BankReconcileToolStripMenuItem.Text = "&Bank Reconcile"
         '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesToolStripMenuItem, Me.PurchaseToolStripMenuItem1})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.ReportsToolStripMenuItem.Text = "&Reports"
         '
         'SalesToolStripMenuItem
         '
         Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
-        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
         Me.SalesToolStripMenuItem.Text = "&Sales"
         '
         'PurchaseToolStripMenuItem1
         '
         Me.PurchaseToolStripMenuItem1.Name = "PurchaseToolStripMenuItem1"
-        Me.PurchaseToolStripMenuItem1.Size = New System.Drawing.Size(118, 22)
+        Me.PurchaseToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
         Me.PurchaseToolStripMenuItem1.Text = "P&urchase"
         '
         'WindowsToolStripMenuItem
         '
         Me.WindowsToolStripMenuItem.Name = "WindowsToolStripMenuItem"
-        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.WindowsToolStripMenuItem.Size = New System.Drawing.Size(68, 20)
         Me.WindowsToolStripMenuItem.Text = "Wind&ows"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
         'Splitter1
@@ -233,105 +332,6 @@ Partial Class frmMainLcm
         Me.btnGeneralLedger.TabIndex = 33
         Me.btnGeneralLedger.Text = "General Ledger"
         Me.btnGeneralLedger.UseVisualStyleBackColor = True
-        '
-        'GeneralLedgerToolStripMenuItem
-        '
-        Me.GeneralLedgerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JournalVoucherToolStripMenuItem})
-        Me.GeneralLedgerToolStripMenuItem.Name = "GeneralLedgerToolStripMenuItem"
-        Me.GeneralLedgerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.GeneralLedgerToolStripMenuItem.Text = "&General Ledger"
-        '
-        'CashAndBankToolStripMenuItem
-        '
-        Me.CashAndBankToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OtherPaymentToolStripMenuItem, Me.OtherDepositToolStripMenuItem, Me.BankReconcileToolStripMenuItem})
-        Me.CashAndBankToolStripMenuItem.Name = "CashAndBankToolStripMenuItem"
-        Me.CashAndBankToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CashAndBankToolStripMenuItem.Text = "&Cash and Bank"
-        '
-        'JournalVoucherToolStripMenuItem
-        '
-        Me.JournalVoucherToolStripMenuItem.Name = "JournalVoucherToolStripMenuItem"
-        Me.JournalVoucherToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.JournalVoucherToolStripMenuItem.Text = "&Journal Voucher"
-        '
-        'OtherPaymentToolStripMenuItem
-        '
-        Me.OtherPaymentToolStripMenuItem.Name = "OtherPaymentToolStripMenuItem"
-        Me.OtherPaymentToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OtherPaymentToolStripMenuItem.Text = "&Other Payment"
-        '
-        'OtherDepositToolStripMenuItem
-        '
-        Me.OtherDepositToolStripMenuItem.Name = "OtherDepositToolStripMenuItem"
-        Me.OtherDepositToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OtherDepositToolStripMenuItem.Text = "O&ther Deposit"
-        '
-        'BankReconcileToolStripMenuItem
-        '
-        Me.BankReconcileToolStripMenuItem.Name = "BankReconcileToolStripMenuItem"
-        Me.BankReconcileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.BankReconcileToolStripMenuItem.Text = "&Bank Reconcile"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.JournalVouchersToolStripMenuItem, Me.AccountHistoryToolStripMenuItem, Me.AccountBalanceToolStripMenuItem, Me.AccountBudgetToolStripMenuItem})
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(158, 22)
-        Me.ToolStripMenuItem1.Text = "&General Ledger"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BankBookToolStripMenuItem, Me.OtherPaymentToolStripMenuItem1, Me.OtherDepositToolStripMenuItem1})
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(158, 22)
-        Me.ToolStripMenuItem2.Text = "&Cash && Bank"
-        '
-        'BankBookToolStripMenuItem
-        '
-        Me.BankBookToolStripMenuItem.Name = "BankBookToolStripMenuItem"
-        Me.BankBookToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.BankBookToolStripMenuItem.Text = "&Bank Book"
-        '
-        'OtherPaymentToolStripMenuItem1
-        '
-        Me.OtherPaymentToolStripMenuItem1.Name = "OtherPaymentToolStripMenuItem1"
-        Me.OtherPaymentToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.OtherPaymentToolStripMenuItem1.Text = "Other &Payment"
-        '
-        'OtherDepositToolStripMenuItem1
-        '
-        Me.OtherDepositToolStripMenuItem1.Name = "OtherDepositToolStripMenuItem1"
-        Me.OtherDepositToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.OtherDepositToolStripMenuItem1.Text = "Other &Deposit"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(155, 6)
-        '
-        'JournalVouchersToolStripMenuItem
-        '
-        Me.JournalVouchersToolStripMenuItem.Name = "JournalVouchersToolStripMenuItem"
-        Me.JournalVouchersToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.JournalVouchersToolStripMenuItem.Text = "&Journal Vouchers"
-        '
-        'AccountHistoryToolStripMenuItem
-        '
-        Me.AccountHistoryToolStripMenuItem.Name = "AccountHistoryToolStripMenuItem"
-        Me.AccountHistoryToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.AccountHistoryToolStripMenuItem.Text = "Account &History"
-        '
-        'AccountBudgetToolStripMenuItem
-        '
-        Me.AccountBudgetToolStripMenuItem.Name = "AccountBudgetToolStripMenuItem"
-        Me.AccountBudgetToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.AccountBudgetToolStripMenuItem.Text = "&Account Budget"
-        '
-        'AccountBalanceToolStripMenuItem
-        '
-        Me.AccountBalanceToolStripMenuItem.Name = "AccountBalanceToolStripMenuItem"
-        Me.AccountBalanceToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
-        Me.AccountBalanceToolStripMenuItem.Text = "Account &Balance"
         '
         'frmMainLcm
         '

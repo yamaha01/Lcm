@@ -34,3 +34,25 @@ D:\Works\Projects\visual studio 2013\LcmApps\LcmApplication\obj\Debug\LcmApplica
 D:\Works\Projects\visual studio 2013\LcmApps\LcmApplication\obj\Debug\LcmApplication.Resources.resources
 D:\Works\Projects\visual studio 2013\LcmApps\LcmApplication\obj\Debug\LcmApplication.frmSalesInvoices.resources
 D:\Works\Projects\visual studio 2013\LcmApps\LcmApplication\obj\Debug\LcmApplication.vbproj.GenerateResource.Cache
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\LcmApplication.exe.config
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.exe
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.xml
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.pdb
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\LcmApplication.exe
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\LcmApplication.pdb
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\LcmApplication.xml
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.vbprojResolveAssemblyReference.cache
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmMainLcm.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmReminders.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmCRPurchaseInvoicesListSummary.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmCRSalesInvoicesListSummary.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmPurchaseInvoice.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmReport.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmReportFormat.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.Resources.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.frmSalesInvoices.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.vbproj.GenerateResource.Cache
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.SalesPayment.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Data.Entity.EF5.dll
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Fabric.Plugin.dll

@@ -47,4 +47,8 @@
     Private Sub CashAndBankToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashAndBankToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub CustomerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerToolStripMenuItem.Click
+        openForm(SalesPayment)
+    End Sub
 End Class
