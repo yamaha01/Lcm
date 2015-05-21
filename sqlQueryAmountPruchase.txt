@@ -1,0 +1,95 @@
+SELECT job_no, job_dt, invoice_no, airline_cd, cust_cd, awb_no, mawb_no, sra_no, service_type, actm_no, pod_final, d1_pol, d1_air_fl1, d1_air_fl2, d1_date, d1_air_fd1, d1_air_fd2, d2_pol, d2_air_fl1, d2_air_fl2, d2_date, d2_air_fd1, d2_air_fd2, d3_pol, d3_air_fl1, d3_air_fl2, d3_date, d3_air_fd1, d3_air_fd2, d4_pol, d4_air_fl1, d4_air_fl2, d4_date, d4_air_fd1, d4_air_fd2, d5_pol, d5_air_fl1, d5_air_fl2, d5_date, d5_air_fd1, d5_air_fd2, marketing_cd, agent_cd, shipper_cd, cnee_cd, comodity_cd, pkgs, pkgs_type, gwt, cwt, cbm, sell_frt, cost_frt, remarks, fix_yn, freight_term, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, schm_sell, schm_buy 
+FROM lcm.clx_entry_job where invoice_no = 'CV500001'
+
+SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_bill_cost where job_no = 'LCM50043'
+
+SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_bill_prepaid where job_no = 'LCM40725'
+
+SELECT airline_cd, airline_nm, awb_prefix, address1, address2, address3, address4, post_code, phone, fax, email, contact, contact_cc, remark, cust_cd, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_air_mst where airline_cd = 'AK'
+
+select 
+    ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, cm.cust_nm, ag.airline_cd, ej.pod_final, nq.amount, nq.total_amt, cbc.AP
+from 
+    (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+FROM lcm.clx_bill_cost group by job_no) cbc
+    inner join  lcm.clx_entry_job ej on ej.job_no = cbc.job_no
+    inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ej.job_no = nq.job_no
+    inner join clx_cust_mst cm on ej.cust_cd = cm.cust_cd
+    inner join clx_aga01 ag on ag.job_no = ej.job_no
+where ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06'
+
+
+select 
+    ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, cm.cust_nm, ag.airline_cd, ej.pod_final, nq.amount, nq.total_amt, cbc.AP
+from 
+    (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+FROM lcm.clx_bill_cost group by job_no) cbc
+    inner join  lcm.clx_entry_job ej on ej.job_no = cbc.job_no
+    inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ej.job_no = nq.job_no
+    inner join clx_cust_mst cm on ej.cust_cd = cm.cust_cd
+    inner join clx_aga01 ag on ag.job_no = ej.job_no
+where ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06'
+
+select 
+    ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, ag.airline_cd, ej.pod_final
+from 
+     clx_entry_job ej, clx_aga01 ag
+where 
+    ag.job_no = ej.job_no and ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06'
+
+select 
+    ejn.job_no, ejn.invoice_no, ejn.job_dt, ejn.cust_cd, cm.cust_nm, ejn.airline_cd, am.airline_nm, ejn.pod_final, nq.amount, nq.total_amt, cbc.AP, (nq.total_amt - cbc.AP)`SVC INCOME`
+from 
+    (select ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, ag.airline_cd, ej.pod_final from clx_entry_job ej, clx_aga01 ag
+    where ag.job_no = ej.job_no and ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06') ejn
+inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ejn.job_no = nq.job_no
+    inner join clx_cust_mst cm on ejn.cust_cd = cm.cust_cd
+    inner join (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+    inner join (SELECT airline_cd, airline_nm, awb_prefix, address1, address2, address3, address4, post_code, phone, fax, email, contact, contact_cc, remark, cust_cd, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_air_mst) am on airline_cd = ejn.airline_cd
+FROM lcm.clx_bill_cost group by job_no) cbc on ejn.job_no = cbc.job_no
+
+
+
+
+SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no
+
+SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`A/P`
+FROM lcm.clx_bill_cost where job_no = 'LCM40725'
+
+select 
+    ejn.job_no, ejn.invoice_no, ejn.job_dt, ejn.cust_cd, cm.cust_nm, ejn.airline_cd, ejn.pod_final, nq.amount, nq.total_amt, cbc.AP, (nq.total_amt - cbc.AP)`SVC INCOME`
+from 
+    (select ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, ag.airline_cd, ej.pod_final from clx_entry_job ej, clx_aga01 ag
+    where ag.job_no = ej.job_no and ag.slip_type = 'I' and ag.ins_dt BETWEEN '" & formatDateFrom & "' AND '" & formatDateTo & "') ejn
+inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ejn.job_no = nq.job_no
+    inner join clx_cust_mst cm on ejn.cust_cd = cm.cust_cd
+    inner join (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+    inner join (SELECT airline_cd, airline_nm, awb_prefix, address1, address2, address3, address4, post_code, phone, fax, email, contact, contact_cc, remark, cust_cd, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_air_mst) am on airline_cd = ejn.airline_cd
+FROM lcm.clx_bill_cost group by job_no) cbc on ejn.job_no = cbc.job_no
+
+
+select ejn.invoice_no as Invoice No, ag.ins_dt as Inv Date, ejn.airline_cd as From No, am.airline_nm as Vendor Name, nq.amount as Invoice Amount, nq.total_amt as Prime Owing, cbc.AP as Base Tax Owing, ag.ins_dt as Due Date, (nq.total_amt - cbc.AP)`SVC INCOME` as Status
+from 
+    (select ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, ag.airline_cd, ej.pod_final from clx_entry_job ej, clx_aga01 ag
+    where ag.job_no = ej.job_no and ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06') ejn
+inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ejn.job_no = nq.job_no
+    inner join clx_cust_mst cm on ejn.cust_cd = cm.cust_cd
+    inner join (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+    inner join (SELECT airline_cd, airline_nm, awb_prefix, address1, address2, address3, address4, post_code, phone, fax, email, contact, contact_cc, remark, cust_cd, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+FROM lcm.clx_air_mst) am on airline_cd = ejn.airline_cd
+FROM lcm.clx_bill_cost group by job_no) cbc on ejn.job_no = cbc.job_no
+
+select ejn.invoice_no as InvoiceNo, ejn.ins_dt as InvDate, ejn.airline_cd as FormNo, am.airline_nm as VendorName, nq.amount as InvoiceAmount, nq.total_amt as PrimeOwing, cbc.AP as BaseTaxOwing, ejn.ins_dt as DueDate, (nq.total_amt - cbc.AP)`Status`
+from (select ej.job_no, ej.invoice_no, ej.job_dt, ej.cust_cd, ag.airline_cd, ag.ins_dt, ej.pod_final from clx_entry_job ej, clx_aga01 ag
+    where ag.job_no = ej.job_no and ag.slip_type = 'I' and ag.ins_dt BETWEEN '2014/12/01' AND '2014/12/06') ejn
+    inner join (SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`, SUM(qty * amt_bill)`total_amt` FROM lcm.clx_bill_prepaid cbp group by job_no) nq on ejn.job_no = nq.job_no
+    inner join (SELECT ams.airline_cd, airline_nm, awb_prefix, address1, address2, address3, address4, post_code, phone, fax, email, contact, contact_cc, remark, cust_cd, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt 
+    FROM lcm.clx_air_mst ams) am on am.airline_cd = ejn.airline_cd
+    inner join clx_cust_mst cm on ejn.cust_cd = cm.cust_cd
+    inner join (SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, amt_bill, remark, invoice_no, ins_dt, ins_id, upd_dt, upd_id, del_id, del_dt, SUM(qty * amt_bill)`AP`
+FROM lcm.clx_bill_cost group by job_no) cbc on ejn.job_no = cbc.job_no

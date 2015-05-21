@@ -1,0 +1,24 @@
+50002
+CO1500102
+
+SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`
+FROM lcm.clx_bill_prepaid where job_no = 'LCM50002' group by job_no
+
+SELECT seq, job_no, freight_cd, cust_kind, cust_cd, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount`
+FROM lcm.clx_bill_prepaid where job_no = 'LCM50002' group by job_no
+
+SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm FROM lcm.clx_entry_job ej, clx_cust_mst cm where job_dt BETWEEN '2015/01/01' AND '2015/01/07' AND (ej.cust_cd = cm.cust_cd) order by invoice_no
+
+SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt BETWEEN '2015/01/01' AND '2015/01/07') AND (ej.cust_cd = cm.cust_cd) order by invoice_no) td), (SELECT seq, job_no as jn, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no) ab)
+
+SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt BETWEEN '2015/01/01' AND '2015/01/07') AND (ej.cust_cd = cm.cust_cd) order by invoice_no) td
+
+SELECT seq, cbp.job_no, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no
+
+SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm, service_type, amount from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm, service_type FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt BETWEEN '2015/01/01' AND '2015/01/07') AND (ej.cust_cd = cm.cust_cd) order by invoice_no) td inner join (SELECT seq, cbp.job_no as jobNo, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no) ab on td.job_no = ab.jobNo
+
+SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm, service_type, amount from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm, service_type FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt BETWEEN '2015/01/01' AND '2015/01/07') AND (ej.cust_cd = cm.cust_cd) order by invoice_no) td inner join (SELECT seq, cbp.job_no as jobNo, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no) ab on td.job_no = ab.jobNo
+
+SELECT job_no, invoice_no, slip_no, job_dt, a.cust_cd, cust_nm, service_type, ins_dt, amount from (SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm, service_type, amount from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm, service_type FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt BETWEEN '2015/01/01' AND '2015/01/06') AND (ej.cust_cd = cm.cust_cd) order by invoice_no) td inner join (SELECT seq, cbp.job_no as jobNo, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no) ab on td.job_no = ab.jobNo) a inner join (select job_no as jobNoAga, slip_no, slip_type, ins_dt from clx_aga01 where slip_type = 'I') aga on a.job_no = aga.jobNoAga
+
+SELECT job_no, invoice_no, slip_no, job_dt, a.cust_cd, cust_nm, service_type, ins_dt, amount from (SELECT job_no, invoice_no, job_dt, td.cust_cd, cust_nm, service_type, amount from (SELECT job_no, invoice_no, job_dt, ej.cust_cd, cust_nm, service_type FROM lcm.clx_entry_job ej, clx_cust_mst cm where (ej.cust_cd = cm.cust_cd) order by invoice_no) td inner join (SELECT seq, cbp.job_no as jobNo, freight_cd, cust_kind, bill_dt, curr_cd, tax_cd, amt_tax, qty, exchange_rate, SUM(`amt_bill`)`amount` FROM lcm.clx_bill_prepaid cbp group by job_no) ab on td.job_no = ab.jobNo) a inner join (select job_no as jobNoAga, slip_no, slip_type, ins_dt from clx_aga01 where slip_type = 'I') aga on a.job_no = aga.jobNoAga AND (job_dt BETWEEN '2015/01/01' AND '2015/01/07') 

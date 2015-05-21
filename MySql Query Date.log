@@ -1,0 +1,1 @@
+SELECT invoice_no, job_dt, ej.cust_cd, cust_nm FROM lcm.clx_entry_job ej, clx_cust_mst cm where (job_dt >= '2015/01/01' and job_dt <= '2015/03/09') and (ej.cust_cd = cm.cust_cd) order by invoice_no 
