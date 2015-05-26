@@ -20,6 +20,7 @@ Public Class SalesPayment
             con = jokenconn()
             con.Open()
             sql = "select distinct b.cust_cd,b.cust_nm from clx_entry_job a inner join clx_cust_mst b on a.cust_cd = b.cust_cd order by b.cust_nm"
+            Logs.TraceLog("sqlQuery populateCust = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
             da = New MySqlDataAdapter(sql, con)
             da.Fill(ds, "customer")
             con.Close()
@@ -100,7 +101,8 @@ Public Class SalesPayment
         Dim publictable As New DataTable
         Try
             con = jokenconn()
-            sql = "select address1,address2,kode_customer,name_customer from customer where kode_customer ='" & kode & "'"
+            sql = "select distinct b.address1,b.address2,b.cust_cd,b.cust_nm from clx_entry_job a inner join clx_cust_mst b on a.cust_cd = b.cust_cd where b.cust_cd ='" & kode & "'"
+            Logs.TraceLog("sqlQuery findCustomerByKode = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
             With cmd
                 .Connection = con
                 .CommandText = sql
@@ -127,7 +129,9 @@ Public Class SalesPayment
         Dim publictable As New DataTable
         Try
             con = jokenconn()
-            sql = "select pih.sales_invoice_no,pih.sales_invoice_date , pih.total_order,IFNULL(pp.owing,pih.total_order)as owing, '0' as payment_amount from sales_invoice_header pih left join sales_payment pp on pih.sales_invoice_no = pp.invoice_no and pp.is_history = 1 where pih.kode_customer = '" & kode & "' and pih.status_sales_invoice = 1"
+            'sql = "select pih.sales_invoice_no,pih.sales_invoice_date , pih.total_order,IFNULL(pp.owing,pih.total_order)as owing, '0' as payment_amount from sales_invoice_header pih left join sales_payment pp on pih.sales_invoice_no = pp.invoice_no and pp.is_history = 1 where pih.kode_customer = '" & kode & "' and pih.status_sales_invoice = 1"
+            sql = "SELECT ej.invoice_no AS sales_invoice_no,ag.ins_dt AS sales_invoice_date,nq.total_amt  AS total_order,IFNULL(pp.owing,nq.total_amt)as owing,'0' as payment_amount FROM lcm.clx_entry_job ej INNER JOIN clx_cust_mst cm ON ej.cust_cd = cm.cust_cd INNER JOIN (SELECT seq,cbp.job_no,freight_cd,cust_kind,bill_dt,curr_cd,tax_cd,amt_tax,qty,exchange_rate,Sum(`amt_bill`)    `amount`, Sum(qty * amt_bill)`total_amt` FROM   lcm.clx_bill_prepaid cbp GROUP  BY job_no) nq ON ej.job_no = nq.job_no INNER JOIN clx_aga01 ag ON ag.job_no = ej.job_no left join sales_payment pp on ej.invoice_no = pp.invoice_no and pp.is_history = 1 WHERE  ag.slip_type = 'I' and cm.cust_cd = '" & kode & "' and (pp.owing IS NULL or pp.owing <> 0 ) ORDER  BY ag.ins_dt asc"
+            Logs.TraceLog("sqlQuery findInvoiceByCustomerKode = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
             With cmd
                 .Connection = con
                 .CommandText = sql
@@ -210,6 +214,19 @@ Public Class SalesPayment
         DataGridViewSP.Rows.Clear()
         TextBoxNotes.Text = ""
         CmbCustomer.SelectedIndex = -1
+    End Sub
+
+    Private Sub refresh()
+        'clearAllFIeld()
+        inisialisasi()
+        Me.idPrimary.Text = getPrimaryId().ToString
+        findCustomerByKode(CmbCustomer.SelectedValue)
+        findInvoiceByCustomerKode(CmbCustomer.SelectedValue)
+        For Each oItem As DataGridViewRow In DataGridViewSP.Rows
+            oItem.Cells(2).Value = CLng(oItem.Cells(2).Value)
+            oItem.Cells(3).Value = CLng(oItem.Cells(3).Value)
+            oItem.Cells(4).Value = CLng(oItem.Cells(4).Value)
+        Next
     End Sub
 
     Private Function insertSP() As Integer
@@ -301,7 +318,7 @@ Public Class SalesPayment
                         sql = "UPDATE sales_invoice_header SET status_sales_invoice = 2 WHERE sales_invoice_no = @invoice_no"
                         sqlCommand.CommandText = sql
                         sqlCommand.Parameters("@invoice_no").Value = oItem.Cells(0).Value
-                        sqlCommand.ExecuteNonQuery()
+                        'sqlCommand.ExecuteNonQuery()
                     End If
                 Else
                     'MessageBox.Show("Pilih salah satu invoice!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -317,6 +334,7 @@ Public Class SalesPayment
             transaction.Commit()
             con.Close()
             MessageBox.Show("Data has been saved", "Info Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return 1
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             Try
@@ -338,9 +356,24 @@ Public Class SalesPayment
 
         Dim temp As Integer = insertSP()
         If temp <> 0 Then
-            Me.Close()
+            'Me.Close()
+            'closeForm(Me)
+            refresh()
         End If
 
+    End Sub
+
+    Public Sub openForm(frmOpen As Form)
+        frmOpen.MdiParent = Me
+        frmOpen.Dock = DockStyle.Fill
+        frmOpen.Show()
+        frmOpen.Location = New Point(0, 0)
+    End Sub
+    Public Sub closeForm(frmOpen As Form)
+        frmOpen.MdiParent = Me
+        frmOpen.Dock = DockStyle.Fill
+        frmOpen.Close()
+        frmOpen.Location = New Point(0, 0)
     End Sub
 
     Private Sub Cancel_Click(sender As Object, e As EventArgs) Handles Cancel.Click
@@ -351,9 +384,10 @@ Public Class SalesPayment
 
         Dim temp As Integer = insertSP()
         If temp <> 0 Then
-            clearAllFIeld()
-            inisialisasi()
-            Me.idPrimary.Text = getPrimaryId().ToString
+            'clearAllFIeld()
+            'inisialisasi()
+            ' Me.idPrimary.Text = getPrimaryId().ToString
+            refresh()
         End If
         
     End Sub
