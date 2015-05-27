@@ -278,6 +278,18 @@ Public Class SalesPayment
             sqlCommand.Parameters.Add("@payment_amount", MySqlDbType.Int64)
             sqlCommand.Parameters.Add("@notes", MySqlDbType.VarChar)
             sqlCommand.Parameters.Add("@is_history", MySqlDbType.Int16)
+            'inisialisasi parameter bank book
+            sqlCommand.Parameters.Add("@trx_date", MySqlDbType.DateTime)
+            sqlCommand.Parameters.Add("@cheque_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@source_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@description", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@bank_name", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@deposit", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@withdrawal", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@balance", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@reconcile_date", MySqlDbType.DateTime)
+            sqlCommand.Parameters.Add("@created_on", MySqlDbType.DateTime)
+
             For Each oItem As DataGridViewRow In DataGridViewSP.Rows
                 If oItem.Cells(5).Value = True Then
                     pilih = 1
@@ -313,6 +325,21 @@ Public Class SalesPayment
                     sqlCommand.Parameters("@is_history").Value = 1
                     sqlCommand.ExecuteNonQuery()
 
+                    'insert ke table bankbook
+                    sql = "INSERT INTO bank_book(trx_date,cheque_no,source_no,description,bank_name,deposit,withdrawal,balance,reconcile_date,created_on) VALUES (@trx_date,@cheque_no,@source_no,@description,@bank_name,@deposit,@withdrawal,@balance,@reconcile_date,@created_on)"
+                    sqlCommand.CommandText = sql
+                    sqlCommand.Parameters("@trx_date").Value = CDate(oItem.Cells(1).Value)
+                    sqlCommand.Parameters("@cheque_no").Value = Nothing
+                    sqlCommand.Parameters("@source_no").Value = oItem.Cells(0).Value
+                    sqlCommand.Parameters("@description").Value = "Sales Payment : " + oItem.Cells(0).Value + " for " + TextBoxNamaCustomer.Text
+                    sqlCommand.Parameters("@bank_name").Value = Nothing                    
+                    sqlCommand.Parameters("@deposit").Value = oItem.Cells(4).Value
+                    sqlCommand.Parameters("@withdrawal").Value = 0
+                    sqlCommand.Parameters("@balance").Value = oItem.Cells(4).Value
+                    sqlCommand.Parameters("@reconcile_date").Value = Nothing
+                    sqlCommand.Parameters("@created_on").Value = DateTime.Now
+                    sqlCommand.ExecuteNonQuery()
+
                     If owing = 0 Then
                         ' update sales order header ubah status menjadi 2 karena sudah di received barang nya
                         sql = "UPDATE sales_invoice_header SET status_sales_invoice = 2 WHERE sales_invoice_no = @invoice_no"
@@ -320,6 +347,9 @@ Public Class SalesPayment
                         sqlCommand.Parameters("@invoice_no").Value = oItem.Cells(0).Value
                         'sqlCommand.ExecuteNonQuery()
                     End If
+
+                    
+
                 Else
                     'MessageBox.Show("Pilih salah satu invoice!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     'Return 0
@@ -330,6 +360,8 @@ Public Class SalesPayment
                 MessageBox.Show("Pilih salah satu invoice!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return 0
             End If
+
+            
 
             transaction.Commit()
             con.Close()

@@ -1,0 +1,36 @@
+CREATE TABLE sales_payment
+(
+  id Bigint NOT NULL AUTO_INCREMENT,
+  kode_customer Varchar(32),
+  nama_customer Varchar(256),
+  alamat_customer Varchar(256),
+  sales_payment_no Varchar(32),
+  payment_date Datetime,
+  invoice_no Varchar(32),
+  invoice_date Datetime,
+  total_order Bigint,
+  owing Bigint,
+  payment_amount Bigint,
+  notes Varchar(256),
+  is_history Int,
+ PRIMARY KEY (id)
+)
+;
+
+
+CREATE TABLE bank_book
+(
+  id Int NOT NULL AUTO_INCREMENT,
+  trx_date Datetime,
+  cheque_no Varchar(32),
+  source_no Varchar(32),
+  description Varchar(256),
+  bank_name Varchar(64),
+  deposit Bigint,
+  withdrawal Bigint,
+  balance Bigint,
+  reconcile_date Datetime,
+  created_on Datetime,
+ PRIMARY KEY (id)
+)
+;
