@@ -33,6 +33,26 @@ Public Class SalesPayment
             con.Close()
         End Try
     End Sub
+    Private Sub populateBank()
+        Dim sql As String
+        Try
+            ds = New DataSet()
+            con = jokenconn()
+            con.Open()
+            sql = "select bank_id,bank_nm from bank order by bank_nm asc"
+            Logs.TraceLog("sqlQuery populateBank = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
+            da = New MySqlDataAdapter(sql, con)
+            da.Fill(ds, "bank")
+            con.Close()
+            CmbBank.DataSource = ds.Tables(0)
+            CmbBank.ValueMember = "bank_nm"
+            CmbBank.DisplayMember = "bank_nm"
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            con.Close()
+        End Try
+    End Sub
     Private Function getPrimaryId() As Integer
         Dim nonqueryCommand As MySqlCommand
         Dim idPrimary As Integer
@@ -218,6 +238,7 @@ Public Class SalesPayment
 
     Private Sub refresh()
         'clearAllFIeld()
+        DataGridViewSP.Rows.Clear()
         inisialisasi()
         Me.idPrimary.Text = getPrimaryId().ToString
         findCustomerByKode(CmbCustomer.SelectedValue)
@@ -253,6 +274,12 @@ Public Class SalesPayment
             If CmbCustomer.SelectedIndex = -1 Then
                 MessageBox.Show("Customer / Konsumen harus diisi!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 CmbCustomer.Focus()
+                Return 0
+            End If
+
+            If CmbBank.SelectedIndex = -1 Then
+                MessageBox.Show("Bank harus diisi!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                CmbBank.Focus()
                 Return 0
             End If
 
@@ -332,7 +359,7 @@ Public Class SalesPayment
                     sqlCommand.Parameters("@cheque_no").Value = Nothing
                     sqlCommand.Parameters("@source_no").Value = oItem.Cells(0).Value
                     sqlCommand.Parameters("@description").Value = "Sales Payment : " + oItem.Cells(0).Value + " for " + TextBoxNamaCustomer.Text
-                    sqlCommand.Parameters("@bank_name").Value = Nothing
+                    sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
                     sqlCommand.Parameters("@deposit").Value = oItem.Cells(4).Value
                     sqlCommand.Parameters("@withdrawal").Value = 0
                     sqlCommand.Parameters("@balance").Value = oItem.Cells(4).Value
@@ -422,5 +449,9 @@ Public Class SalesPayment
             refresh()
         End If
 
+    End Sub
+
+    Private Sub CmbBank_Click(sender As Object, e As EventArgs) Handles CmbBank.Click
+        populateBank()
     End Sub
 End Class
