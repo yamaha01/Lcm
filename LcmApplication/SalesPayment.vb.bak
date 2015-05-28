@@ -1,8 +1,8 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class SalesPayment
-    Dim da As New MySqlDataAdapter
-    Dim con As MySqlConnection
+    Dim da As New Odbc.OdbcDataAdapter
+    Dim con As New Odbc.OdbcConnection("DSN=lcm-local")
     Dim ds As DataSet
     Public kodeSupplier As String
     Private rowIndex As Integer = 0
@@ -15,13 +15,15 @@ Public Class SalesPayment
     End Function
     Private Sub populateCust()
         Dim sql As String
+        Dim MyCommand As New Odbc.OdbcCommand
         Try
             ds = New DataSet()
-            con = jokenconn()
             con.Open()
             sql = "select distinct b.cust_cd,b.cust_nm from clx_entry_job a inner join clx_cust_mst b on a.cust_cd = b.cust_cd order by b.cust_nm"
             Logs.TraceLog("sqlQuery populateCust = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
-            da = New MySqlDataAdapter(sql, con)
+            MyCommand.CommandText = sql
+            MyCommand.Connection = con
+            da.SelectCommand = MyCommand            
             da.Fill(ds, "customer")
             con.Close()
             CmbCustomer.DataSource = ds.Tables(0)
@@ -34,16 +36,15 @@ Public Class SalesPayment
         End Try
     End Sub
     Private Function getPrimaryId() As Integer
-        Dim nonqueryCommand As MySqlCommand
+        Dim MyCommand As New Odbc.OdbcCommand
         Dim idPrimary As Integer
         Try
-            con = jokenconn()
             con.Open()
-            nonqueryCommand = con.CreateCommand()
             Dim Sql As String
             Sql = "select id from sales_payment order by id desc limit 0,1"
-            Dim scalarCommand As New MySqlCommand(Sql, con)
-            idPrimary = scalarCommand.ExecuteScalar()
+            MyCommand.CommandText = Sql
+            MyCommand.Connection = con
+            idPrimary = MyCommand.ExecuteScalar()
             idPrimary = idPrimary + 1
             con.Close()
         Catch ex As MySqlException
@@ -99,15 +100,14 @@ Public Class SalesPayment
         Dim sql As String
         Dim cmd As New MySqlCommand
         Dim publictable As New DataTable
+        Dim MyCommand As New Odbc.OdbcCommand
         Try
-            con = jokenconn()
+            con.Open()
             sql = "select distinct b.address1,b.address2,b.cust_cd,b.cust_nm from clx_entry_job a inner join clx_cust_mst b on a.cust_cd = b.cust_cd where b.cust_cd ='" & kode & "'"
             Logs.TraceLog("sqlQuery findCustomerByKode = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
-            With cmd
-                .Connection = con
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
+            MyCommand.CommandText = sql
+            MyCommand.Connection = con
+            da.SelectCommand = MyCommand
             da.Fill(publictable)
             If publictable.Rows.Count > 0 Then
                 alamatCustomer.Text = publictable.Rows(0).Item(0) + " " + publictable.Rows(0).Item(1)
@@ -127,16 +127,15 @@ Public Class SalesPayment
         Dim sql As String
         Dim cmd As New MySqlCommand
         Dim publictable As New DataTable
+        Dim MyCommand As New Odbc.OdbcCommand
         Try
-            con = jokenconn()
+            con.Open()
             'sql = "select pih.sales_invoice_no,pih.sales_invoice_date , pih.total_order,IFNULL(pp.owing,pih.total_order)as owing, '0' as payment_amount from sales_invoice_header pih left join sales_payment pp on pih.sales_invoice_no = pp.invoice_no and pp.is_history = 1 where pih.kode_customer = '" & kode & "' and pih.status_sales_invoice = 1"
-            sql = "SELECT ej.invoice_no AS sales_invoice_no,ag.ins_dt AS sales_invoice_date,nq.total_amt  AS total_order,IFNULL(pp.owing,nq.total_amt)as owing,'0' as payment_amount FROM lcm.clx_entry_job ej INNER JOIN clx_cust_mst cm ON ej.cust_cd = cm.cust_cd INNER JOIN (SELECT seq,cbp.job_no,freight_cd,cust_kind,bill_dt,curr_cd,tax_cd,amt_tax,qty,exchange_rate,Sum(`amt_bill`)    `amount`, Sum(qty * amt_bill)`total_amt` FROM   lcm.clx_bill_prepaid cbp GROUP  BY job_no) nq ON ej.job_no = nq.job_no INNER JOIN clx_aga01 ag ON ag.job_no = ej.job_no left join sales_payment pp on ej.invoice_no = pp.invoice_no and pp.is_history = 1 WHERE  ag.slip_type = 'I' and cm.cust_cd = '" & kode & "' and (pp.owing IS NULL or pp.owing <> 0 ) ORDER  BY ag.ins_dt asc"
+            sql = "SELECT ej.invoice_no AS sales_invoice_no,ag.ins_dt AS sales_invoice_date,nq.total_amt  AS total_order,IFNULL(pp.owing,nq.total_amt)as owing,'0' as payment_amount FROM lcm.clx_entry_job ej INNER JOIN clx_cust_mst cm ON ej.cust_cd = cm.cust_cd INNER JOIN (SELECT seq,cbp.job_no,freight_cd,cust_kind,bill_dt,curr_cd,tax_cd,amt_tax,qty,exchange_rate,Sum(`amt_bill`)    `amount`, Sum(qty * amt_bill)`total_amt` FROM   lcm.clx_bill_prepaid cbp GROUP  BY job_no) nq ON ej.job_no = nq.job_no INNER JOIN clx_aga01 ag ON ag.job_no = ej.job_no left join sales_payment pp on ej.invoice_no = pp.invoice_no and pp.is_history = 1 WHERE  ag.slip_type = 'I' and cm.cust_cd = '" & kode & "' and (pp.owing IS NULL or pp.owing <> 0 ) ORDER  BY ag.ins_dt asc LIMIT 30"
             Logs.TraceLog("sqlQuery findInvoiceByCustomerKode = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
-            With cmd
-                .Connection = con
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
+            MyCommand.CommandText = sql
+            MyCommand.Connection = con
+            da.SelectCommand = MyCommand
             da.Fill(publictable)
             If publictable.Rows.Count > 0 Then
                 Dim row As String()
@@ -231,13 +230,12 @@ Public Class SalesPayment
 
     Private Function insertSP() As Integer
         Dim rowEffected As Integer = 0
-        Dim sqlCommand As New MySqlCommand
+        Dim sqlCommand As New Odbc.OdbcCommand
         Dim sql As String
         Dim pilih As Integer
         Dim now As DateTime = DateTime.Now
-        Dim transaction As MySqlTransaction
+        Dim transaction As System.Data.Odbc.OdbcTransaction
         Dim queryGetIdentity As String = "Select @@Identity"
-        con = jokenconn()
         con.Open()
         ' Start a local transaction
         transaction = con.BeginTransaction(IsolationLevel.ReadCommitted)
@@ -266,29 +264,29 @@ Public Class SalesPayment
             'removeSeparatorBeforeInsert()
             sqlCommand.Connection = con
             sqlCommand.Transaction = transaction
-            sqlCommand.Parameters.Add("@kode_customer", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@nama_customer", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@alamat_customer", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@invoice_no", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@invoice_date", MySqlDbType.DateTime)
-            sqlCommand.Parameters.Add("@sales_payment_no", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@payment_date", MySqlDbType.DateTime)
-            sqlCommand.Parameters.Add("@total_order", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@owing", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@payment_amount", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@notes", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@is_history", MySqlDbType.Int16)
+            sqlCommand.Parameters.Add("@kode_customer", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@nama_customer", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@alamat_customer", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add(New Odbc.OdbcParameter("@invoice_no", "C005"))
+            sqlCommand.Parameters.Add("@invoice_date", Odbc.OdbcType.DateTime)
+            sqlCommand.Parameters.Add("@sales_payment_no", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@payment_date", Odbc.OdbcType.DateTime)
+            sqlCommand.Parameters.Add("@total_order", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@owing", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@payment_amount", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@notes", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@is_history", Odbc.OdbcType.Int)
             'inisialisasi parameter bank book
-            sqlCommand.Parameters.Add("@trx_date", MySqlDbType.DateTime)
-            sqlCommand.Parameters.Add("@cheque_no", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@source_no", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@description", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@bank_name", MySqlDbType.VarChar)
-            sqlCommand.Parameters.Add("@deposit", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@withdrawal", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@balance", MySqlDbType.Int64)
-            sqlCommand.Parameters.Add("@reconcile_date", MySqlDbType.DateTime)
-            sqlCommand.Parameters.Add("@created_on", MySqlDbType.DateTime)
+            sqlCommand.Parameters.Add("@trx_date", Odbc.OdbcType.DateTime)
+            sqlCommand.Parameters.Add("@cheque_no", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@source_no", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@description", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@bank_name", Odbc.OdbcType.VarChar)
+            sqlCommand.Parameters.Add("@deposit", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@withdrawal", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@balance", Odbc.OdbcType.BigInt)
+            sqlCommand.Parameters.Add("@reconcile_date", Odbc.OdbcType.DateTime)
+            sqlCommand.Parameters.Add("@created_on", Odbc.OdbcType.DateTime)
 
             For Each oItem As DataGridViewRow In DataGridViewSP.Rows
                 If oItem.Cells(5).Value = True Then
