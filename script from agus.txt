@@ -34,3 +34,24 @@ CREATE TABLE bank_book
  PRIMARY KEY (id)
 )
 ;
+
+
+CREATE TABLE purchase_payment
+(
+  id Bigint NOT NULL AUTO_INCREMENT,
+  kode_supplier Varchar(32),
+  nama_supplier Varchar(256),
+  alamat_supplier Varchar(256),
+  invoice_no Varchar(32),
+  form_no_invoice Varchar(32),
+  invoice_date Datetime,
+  payment_date Datetime,
+  form_no Varchar(32),
+  total_order Bigint,
+  owing Bigint,
+  payment_amount Bigint,
+  notes Varchar(256),
+  is_history Int,
+ PRIMARY KEY (id)
+)
+;

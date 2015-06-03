@@ -13,7 +13,7 @@
         'frmReminders.Location = New Point(0, 0)
         'openForm(frmSalesInvoices)
         'openForm(frmReport)
-        openForm(frmPurchaseInvoice)
+        'openForm(frmPurchaseInvoice)
     End Sub
     
 
@@ -50,5 +50,17 @@
 
     Private Sub CustomerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerToolStripMenuItem.Click
         openForm(SalesPayment)
+    End Sub
+
+    Private Sub PurchasesPaymentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchasesPaymentToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub PurchasePaymentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PurchasePaymentToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        openForm(PurchasePayment)
     End Sub
 End Class
