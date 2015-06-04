@@ -33,6 +33,26 @@ Public Class PurchasePayment
             con.Close()
         End Try
     End Sub
+    Private Sub populateBank()
+        Dim sql As String
+        Try
+            ds = New DataSet()
+            con = jokenconn()
+            con.Open()
+            sql = "select bank_id,bank_nm from bank order by bank_nm asc"
+            Logs.TraceLog("sqlQuery populateBank = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
+            da = New MySqlDataAdapter(sql, con)
+            da.Fill(ds, "bank")
+            con.Close()
+            CmbBank.DataSource = ds.Tables(0)
+            CmbBank.ValueMember = "bank_nm"
+            CmbBank.DisplayMember = "bank_nm"
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        Finally
+            con.Close()
+        End Try
+    End Sub
     Private Function getPrimaryId() As Integer
         Dim nonqueryCommand As MySqlCommand
         Dim idPrimary As Integer
@@ -380,5 +400,9 @@ Public Class PurchasePayment
             oItem.Cells(3).Value = CLng(oItem.Cells(3).Value)
             oItem.Cells(4).Value = CLng(oItem.Cells(4).Value)
         Next
+    End Sub
+
+    Private Sub CmbBank_Click(sender As Object, e As EventArgs) Handles CmbBank.Click
+        populateBank()
     End Sub
 End Class
