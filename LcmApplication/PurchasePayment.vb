@@ -333,6 +333,21 @@ Public Class PurchasePayment
                     sqlCommand.Parameters("@is_history").Value = 1
                     sqlCommand.ExecuteNonQuery()
 
+                    'insert ke table bankbook
+                    sql = "INSERT INTO bank_book(trx_date,cheque_no,source_no,description,bank_name,deposit,withdrawal,balance,reconcile_date,created_on) VALUES (@trx_date,@cheque_no,@source_no,@description,@bank_name,@deposit,@withdrawal,@balance,@reconcile_date,@created_on)"
+                    sqlCommand.CommandText = sql
+                    sqlCommand.Parameters("@trx_date").Value = CDate(oItem.Cells(1).Value)
+                    sqlCommand.Parameters("@cheque_no").Value = Nothing
+                    sqlCommand.Parameters("@source_no").Value = oItem.Cells(0).Value
+                    sqlCommand.Parameters("@description").Value = "Purchase Payment : " + oItem.Cells(0).Value + " for " + TextBoxNamaSupplier.Text
+                    sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
+                    sqlCommand.Parameters("@deposit").Value = 0
+                    sqlCommand.Parameters("@withdrawal").Value = oItem.Cells(4).Value
+                    sqlCommand.Parameters("@balance").Value = oItem.Cells(4).Value
+                    sqlCommand.Parameters("@reconcile_date").Value = Nothing
+                    sqlCommand.Parameters("@created_on").Value = DateTime.Now
+                    sqlCommand.ExecuteNonQuery()
+
                     If owing = 0 Then
                         ' update purchase order header ubah status menjadi 2 karena sudah di received barang nya
                         sql = "UPDATE purchase_invoice_header SET status_invoice = 2 WHERE form_no = @form_no_invoice"
