@@ -11,7 +11,7 @@ Public Class BankBook
         Return New MySqlConnection(urlDb)
     End Function
     Private Sub inisialisasi()
-        Me.DataGridViewBankBook.ColumnCount = 8
+        Me.DataGridViewBankBook.ColumnCount = 9
         Me.DataGridViewBankBook.Columns(0).Name = "Date"
         Me.DataGridViewBankBook.Columns(1).Name = "Source No"
         Me.DataGridViewBankBook.Columns(2).Name = "Cheque No"
@@ -20,6 +20,7 @@ Public Class BankBook
         Me.DataGridViewBankBook.Columns(5).Name = "Withdrawal"
         Me.DataGridViewBankBook.Columns(6).Name = "Balance"
         Me.DataGridViewBankBook.Columns(7).Name = "Reconciled"
+        Me.DataGridViewBankBook.Columns(8).Name = "CreatedOn"
         DataGridViewBankBook.Columns(0).ReadOnly = True
         DataGridViewBankBook.Columns(1).ReadOnly = True
         DataGridViewBankBook.Columns(2).ReadOnly = True
@@ -28,6 +29,7 @@ Public Class BankBook
         DataGridViewBankBook.Columns(5).ReadOnly = True
         DataGridViewBankBook.Columns(6).ReadOnly = True
         DataGridViewBankBook.Columns(7).ReadOnly = True
+        DataGridViewBankBook.Columns(8).ReadOnly = True
         formatKolomNumeric()
     End Sub
     Private Sub formatKolomNumeric()
@@ -70,7 +72,7 @@ Public Class BankBook
         Dim publictable As New DataTable
         Try
             con = jokenconn()
-            sql = "select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date from bank_book bb where 1 = 1"
+            sql = "select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date,bb.created_on from bank_book bb where 1 = 1"
             sql = sql + " and bb.bank_name = '" & CmbBank.SelectedValue & "'"
             sql = sql + " and bb.created_on BETWEEN @startDate AND @endDate"
             Logs.TraceLog("sqlQuery findBankBookByParam = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
@@ -85,7 +87,7 @@ Public Class BankBook
             If publictable.Rows.Count > 0 Then
                 Dim row As String()                
                 For Each oRecord As Object In publictable.Rows
-                    row = New String() {oRecord("trx_date").ToString(), oRecord("source_no").ToString(), oRecord("cheque_no").ToString(), oRecord("description").ToString(), oRecord("deposit").ToString(), oRecord("withdrawal").ToString(), oRecord("balance").ToString(), oRecord("reconcile_date").ToString()}
+                    row = New String() {oRecord("trx_date").ToString(), oRecord("source_no").ToString(), oRecord("cheque_no").ToString(), oRecord("description").ToString(), oRecord("deposit").ToString(), oRecord("withdrawal").ToString(), oRecord("balance").ToString(), oRecord("reconcile_date").ToString(), oRecord("created_on").ToString()}
                     DataGridViewBankBook.Rows.Add(row)
                 Next
                 For Each oItem As DataGridViewRow In DataGridViewBankBook.Rows

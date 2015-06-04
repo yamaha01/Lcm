@@ -350,6 +350,14 @@ Public Class PurchasePayment
                     sqlCommand.Parameters("@is_history").Value = 1
                     sqlCommand.ExecuteNonQuery()
 
+                    'dapetin balance
+                    sql = "select IFNULL(balance,0) as balance from bank_book WHERE bank_name = @bank_name order by id desc limit 0,1"
+                    sqlCommand.CommandText = sql
+                    sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
+                    Dim balance As Long = sqlCommand.ExecuteScalar()
+                    Dim balanceInput As Long
+                    balanceInput = balance - CLng(oItem.Cells(4).Value)
+
                     'insert ke table bankbook
                     sql = "INSERT INTO bank_book(trx_date,cheque_no,source_no,description,bank_name,deposit,withdrawal,balance,reconcile_date,created_on) VALUES (@trx_date,@cheque_no,@source_no,@description,@bank_name,@deposit,@withdrawal,@balance,@reconcile_date,@created_on)"
                     sqlCommand.CommandText = sql
@@ -360,7 +368,7 @@ Public Class PurchasePayment
                     sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
                     sqlCommand.Parameters("@deposit").Value = 0
                     sqlCommand.Parameters("@withdrawal").Value = oItem.Cells(4).Value
-                    sqlCommand.Parameters("@balance").Value = oItem.Cells(4).Value
+                    sqlCommand.Parameters("@balance").Value = balanceInput
                     sqlCommand.Parameters("@reconcile_date").Value = Nothing
                     sqlCommand.Parameters("@created_on").Value = DateTime.Now
                     sqlCommand.ExecuteNonQuery()
