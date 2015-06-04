@@ -57,3 +57,4 @@ D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Data.Entity.EF5.dll
 D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Data.Entity.EF6.dll
 D:\Personal\IT_Solution\Lcm\LcmApplication\bin\Debug\MySql.Fabric.Plugin.dll
 D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.PurchasePayment.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.BankBook.resources

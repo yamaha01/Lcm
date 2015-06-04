@@ -43,6 +43,7 @@ Partial Class frmMainLcm
         Me.SalesReturnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchasePaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchasesPaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ActivityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneralLedgerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,6 +52,7 @@ Partial Class frmMainLcm
         Me.OtherPaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtherDepositToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BankReconcileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PurchasePaymentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,8 +64,6 @@ Partial Class frmMainLcm
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnGeneralLedger = New System.Windows.Forms.Button()
-        Me.PurchasePaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PurchasePaymentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -206,6 +206,12 @@ Partial Class frmMainLcm
         Me.PurchasesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
         Me.PurchasesToolStripMenuItem.Text = "Pu&rchases"
         '
+        'PurchasePaymentToolStripMenuItem
+        '
+        Me.PurchasePaymentToolStripMenuItem.Name = "PurchasePaymentToolStripMenuItem"
+        Me.PurchasePaymentToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+        Me.PurchasePaymentToolStripMenuItem.Text = "Purchase Payment"
+        '
         'PurchasesPaymentToolStripMenuItem
         '
         Me.PurchasesPaymentToolStripMenuItem.Name = "PurchasesPaymentToolStripMenuItem"
@@ -242,20 +248,26 @@ Partial Class frmMainLcm
         'OtherPaymentToolStripMenuItem
         '
         Me.OtherPaymentToolStripMenuItem.Name = "OtherPaymentToolStripMenuItem"
-        Me.OtherPaymentToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OtherPaymentToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.OtherPaymentToolStripMenuItem.Text = "&Other Payment"
         '
         'OtherDepositToolStripMenuItem
         '
         Me.OtherDepositToolStripMenuItem.Name = "OtherDepositToolStripMenuItem"
-        Me.OtherDepositToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OtherDepositToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.OtherDepositToolStripMenuItem.Text = "O&ther Deposit"
         '
         'BankReconcileToolStripMenuItem
         '
         Me.BankReconcileToolStripMenuItem.Name = "BankReconcileToolStripMenuItem"
-        Me.BankReconcileToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.BankReconcileToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
         Me.BankReconcileToolStripMenuItem.Text = "&Bank Reconcile"
+        '
+        'PurchasePaymentToolStripMenuItem1
+        '
+        Me.PurchasePaymentToolStripMenuItem1.Name = "PurchasePaymentToolStripMenuItem1"
+        Me.PurchasePaymentToolStripMenuItem1.Size = New System.Drawing.Size(172, 22)
+        Me.PurchasePaymentToolStripMenuItem1.Text = "Purchase Payment"
         '
         'ReportsToolStripMenuItem
         '
@@ -342,18 +354,6 @@ Partial Class frmMainLcm
         Me.btnGeneralLedger.TabIndex = 33
         Me.btnGeneralLedger.Text = "General Ledger"
         Me.btnGeneralLedger.UseVisualStyleBackColor = True
-        '
-        'PurchasePaymentToolStripMenuItem
-        '
-        Me.PurchasePaymentToolStripMenuItem.Name = "PurchasePaymentToolStripMenuItem"
-        Me.PurchasePaymentToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-        Me.PurchasePaymentToolStripMenuItem.Text = "Purchase Payment"
-        '
-        'PurchasePaymentToolStripMenuItem1
-        '
-        Me.PurchasePaymentToolStripMenuItem1.Name = "PurchasePaymentToolStripMenuItem1"
-        Me.PurchasePaymentToolStripMenuItem1.Size = New System.Drawing.Size(172, 22)
-        Me.PurchasePaymentToolStripMenuItem1.Text = "Purchase Payment"
         '
         'frmMainLcm
         '

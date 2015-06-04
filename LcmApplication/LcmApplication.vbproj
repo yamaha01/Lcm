@@ -97,6 +97,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankBook.Designer.vb">
+      <DependentUpon>BankBook.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BankBook.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="crPurchaseInvoicesListSummary.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,6 +219,9 @@
     <Compile Include="Session.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BankBook.resx">
+      <DependentUpon>BankBook.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="crPurchaseInvoicesListSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crPurchaseInvoicesListSummary.vb</LastGenOutput>

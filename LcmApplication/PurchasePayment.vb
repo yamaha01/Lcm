@@ -274,6 +274,12 @@ Public Class PurchasePayment
                 Return 0
             End If
 
+            If CmbBank.SelectedIndex = -1 Then
+                MessageBox.Show("Bank harus diisi!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                CmbBank.Focus()
+                Return 0
+            End If
+
             If DataGridViewVP.Rows.Count = 0 Then
                 MessageBox.Show("Items harus diisi!.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return 0
@@ -297,6 +303,17 @@ Public Class PurchasePayment
             sqlCommand.Parameters.Add("@payment_amount", MySqlDbType.Int64)
             sqlCommand.Parameters.Add("@notes", MySqlDbType.VarChar)
             sqlCommand.Parameters.Add("@is_history", MySqlDbType.Int16)
+            'inisialisasi parameter bank book
+            sqlCommand.Parameters.Add("@trx_date", MySqlDbType.DateTime)
+            sqlCommand.Parameters.Add("@cheque_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@source_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@description", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@bank_name", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@deposit", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@withdrawal", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@balance", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@reconcile_date", MySqlDbType.DateTime)
+            sqlCommand.Parameters.Add("@created_on", MySqlDbType.DateTime)
             For Each oItem As DataGridViewRow In DataGridViewVP.Rows
                 If oItem.Cells(5).Value = True Then
                     pilih = 1
