@@ -1653,3 +1653,19 @@
 2015-06-05 01:47:15.293 PM Debug [findBankBookByParam] sqlQuery findBankBookByParam = select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date,bb.created_on from bank_book bb where 1 = 1 and bb.bank_name = 'UOB BUANA' and bb.created_on BETWEEN @startDate AND @endDate
 2015-06-05 01:47:41.717 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
 2015-06-05 01:47:44.273 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-05 02:27:54.894 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-05 02:27:57.496 PM Debug [findBankBookByParam] sqlQuery findBankBookByParam = select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date,bb.created_on from bank_book bb where 1 = 1 and bb.bank_name = 'CIMB Niaga' and bb.created_on BETWEEN @startDate AND @endDate
+2015-06-05 02:28:01.849 PM Debug [findBankBookByParam] sqlQuery findBankBookByParam = select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date,bb.created_on from bank_book bb where 1 = 1 and bb.bank_name = 'CIMB Niaga' and bb.created_on BETWEEN @startDate AND @endDate
+2015-06-06 11:44:09.130 AM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:02:36.234 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:03:06.617 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:05:22.662 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:06:08.538 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:06:50.917 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:09:26.649 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:10:34.546 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:11:40.173 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:13:12.534 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:39:36.061 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 12:39:42.411 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account
+2015-06-06 12:40:02.732 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account

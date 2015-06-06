@@ -67,4 +67,8 @@
     Private Sub BankBookToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BankBookToolStripMenuItem.Click
         openForm(BankBook)
     End Sub
+
+    Private Sub OtherDepositToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OtherDepositToolStripMenuItem1.Click
+        openForm(OtherDeposit)
+    End Sub
 End Class

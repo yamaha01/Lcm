@@ -180,6 +180,12 @@
     <Compile Include="FormReminders.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ListGlAccount.Designer.vb">
+      <DependentUpon>ListGlAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListGlAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Logs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -197,6 +203,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="mySqlDB.vb" />
+    <Compile Include="OtherDeposit.Designer.vb">
+      <DependentUpon>OtherDeposit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OtherDeposit.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PoVO.vb" />
     <Compile Include="PurchasePayment.Designer.vb">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
@@ -255,11 +267,17 @@
     <EmbeddedResource Include="frmReportFormat.resx">
       <DependentUpon>frmReportFormat.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListGlAccount.resx">
+      <DependentUpon>ListGlAccount.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherDeposit.resx">
+      <DependentUpon>OtherDeposit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PurchasePayment.resx">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
