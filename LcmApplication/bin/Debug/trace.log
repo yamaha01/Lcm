@@ -1669,3 +1669,72 @@
 2015-06-06 12:39:36.061 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
 2015-06-06 12:39:42.411 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account
 2015-06-06 12:40:02.732 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account
+2015-06-06 01:37:28.100 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:37:35.559 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:38:50.999 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:38:57.631 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:39:07.992 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1 and no_acc like %1102
+2015-06-06 01:41:48.567 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:41:53.026 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:41:58.023 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1 and desc_acc like 'bni%'
+2015-06-06 01:42:07.306 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1 and no_acc like '1102%' and desc_acc like 'bni%'
+2015-06-06 01:50:57.016 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:51:01.961 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:51:27.296 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:51:29.022 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:51:32.777 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:52:07.954 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:52:13.664 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:52:24.011 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1 and desc_acc like 'account%'
+2015-06-06 01:52:28.300 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1 and desc_acc like 'income%'
+2015-06-06 01:52:53.993 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:56:36.005 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:56:42.769 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:57:31.247 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:57:35.855 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 01:58:30.862 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 01:58:34.300 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:03:02.334 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:03:05.719 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:08:10.677 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:08:18.455 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:10:54.041 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:10:58.710 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:11:52.362 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:11:56.797 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:12:49.025 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:12:52.426 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:13:06.903 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:14:18.070 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:14:21.468 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:15:37.392 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:15:40.180 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:16:49.924 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:16:52.949 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:17:59.583 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:18:02.135 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:24:58.095 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:25:01.395 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:25:13.030 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:28:13.345 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:28:15.999 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:28:26.804 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:29:26.552 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:29:38.605 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:29:48.461 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:32:23.170 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:32:30.450 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:32:39.169 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:36:37.190 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:36:42.835 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:37:23.821 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:37:27.405 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:40:29.495 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:40:32.264 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:41:24.109 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:41:27.121 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:42:07.033 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:42:14.687 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:42:48.292 PM Debug [populateBank] sqlQuery populateBank = select bank_id,bank_nm from bank order by bank_nm asc
+2015-06-06 02:42:52.247 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1
+2015-06-06 02:43:01.230 PM Debug [refreshGrid] sqlQuery refreshGrid = select * from account where 1 = 1

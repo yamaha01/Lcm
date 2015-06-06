@@ -21,10 +21,6 @@ Public Class OtherDeposit
         Me.DataGridViewOtherDeposit.Columns(5).Name = "Project"
         DataGridViewOtherDeposit.Columns(0).ReadOnly = True
         DataGridViewOtherDeposit.Columns(1).ReadOnly = True
-        DataGridViewOtherDeposit.Columns(2).ReadOnly = True
-        DataGridViewOtherDeposit.Columns(3).ReadOnly = True
-        DataGridViewOtherDeposit.Columns(4).ReadOnly = True
-        DataGridViewOtherDeposit.Columns(5).ReadOnly = True
         formatKolomNumeric()
         DataGridViewOtherDeposit.ClearSelection()
         Dim idx As Integer = DataGridViewOtherDeposit.RowCount
@@ -36,6 +32,15 @@ Public Class OtherDeposit
         Else
             DataGridViewOtherDeposit.NotifyCurrentCellDirty(True)
         End If
+        txtAmount.Text = 0
+    End Sub
+    Private Sub hitungTotalHarga(rowIdx As Integer)
+        Dim amount As Long
+        Dim totalAmount As Long
+        amount = DataGridViewOtherDeposit.Rows(rowIdx).Cells(2).Value
+        totalAmount = CLng(txtAmount.Text)
+        totalAmount = totalAmount + amount
+        txtAmount.Text = CStr(totalAmount)
     End Sub
 
     Private Sub formatKolomNumeric()
@@ -75,7 +80,14 @@ Public Class OtherDeposit
     Private Sub ButtonSaveNew_Click(sender As Object, e As EventArgs) Handles ButtonSaveNew.Click
         insertDeposit()
     End Sub
-
+    Private Sub clearAllFIeld()
+        txtAmount.Text = "0"
+        txtMemo.Text = ""
+        TextBoxVoucherNo.Text = ""
+        DataGridViewOtherDeposit.Rows.Clear()
+        CmbBank.SelectedIndex = -1
+        inisialisasi()
+    End Sub
     Private Function insertDeposit() As Integer
         Dim rowEffected As Integer = 0
         Dim sqlCommand As New MySqlCommand
@@ -116,7 +128,7 @@ Public Class OtherDeposit
 
             ' Insert Other Deposit Header
             'Dim session As Session = Login.getSession()
-            removeSeparatorBeforeInsert()
+
             sqlCommand.Connection = con
             sqlCommand.Transaction = transaction
             sqlCommand.Parameters.Add("@bank_name", MySqlDbType.VarChar)
@@ -125,6 +137,22 @@ Public Class OtherDeposit
             sqlCommand.Parameters.Add("@memo", MySqlDbType.VarChar)
             sqlCommand.Parameters.Add("@amount", MySqlDbType.Int64)
             sqlCommand.Parameters.Add("@created_on", MySqlDbType.DateTime)
+            'param detail
+            sqlCommand.Parameters.Add("@header_id", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@acc_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@desc_acc", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@dep", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@proj", MySqlDbType.VarChar)
+            'inisialisasi parameter bank book
+            sqlCommand.Parameters.Add("@cheque_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@source_no", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@description", MySqlDbType.VarChar)
+            sqlCommand.Parameters.Add("@deposit", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@withdrawal", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@balance", MySqlDbType.Int64)
+            sqlCommand.Parameters.Add("@reconcile_date", MySqlDbType.DateTime)
+
+
             ' insert header
             sql = "INSERT INTO other_deposit_header(bank_name,voucher_no,trx_date,memo,amount,created_on) VALUES (@bank_name,@voucher_no,@trx_date,@memo,@amount,@created_on)"
             sqlCommand.CommandText = sql
@@ -132,19 +160,60 @@ Public Class OtherDeposit
             sqlCommand.Parameters("@voucher_no").Value = TextBoxVoucherNo.Text
             sqlCommand.Parameters("@trx_date").Value = CDate(DtDepositDate.Value)
             sqlCommand.Parameters("@memo").Value = txtMemo.Text
-            sqlCommand.Parameters("@amount").Value = txtAmount.Text
+            Dim temp As String
+            temp = txtAmount.Text
+            temp = temp.Replace(",", "")
+            sqlCommand.Parameters("@amount").Value = temp
             sqlCommand.Parameters("@created_on").Value = DateTime.Now
             sqlCommand.ExecuteNonQuery()
             sqlCommand.CommandText = queryGetIdentity
             Dim ID As Long
             ID = sqlCommand.ExecuteScalar()
+
+            'dapetin balance
+            sql = "select IFNULL(balance,0) as balance from bank_book WHERE bank_name = @bank_name order by id desc limit 0,1"
+            sqlCommand.CommandText = sql
+            sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
+            Dim balance As Long = sqlCommand.ExecuteScalar()
+            Dim balanceInput As Long
+            balanceInput = balance + CLng(temp)
+
+            'insert ke table bankbook
+            sql = "INSERT INTO bank_book(trx_date,cheque_no,source_no,description,bank_name,deposit,withdrawal,balance,reconcile_date,created_on) VALUES (@trx_date,@cheque_no,@source_no,@description,@bank_name,@deposit,@withdrawal,@balance,@reconcile_date,@created_on)"
+            sqlCommand.CommandText = sql
+            sqlCommand.Parameters("@trx_date").Value = DateTime.Now
+            sqlCommand.Parameters("@cheque_no").Value = Nothing
+            sqlCommand.Parameters("@source_no").Value = TextBoxVoucherNo.Text
+            sqlCommand.Parameters("@description").Value = "Other Deposit : " + CmbBank.SelectedValue + " for " + TextBoxVoucherNo.Text
+            sqlCommand.Parameters("@bank_name").Value = CmbBank.SelectedValue
+            sqlCommand.Parameters("@deposit").Value = temp
+            sqlCommand.Parameters("@withdrawal").Value = 0
+            sqlCommand.Parameters("@balance").Value = balanceInput
+            sqlCommand.Parameters("@reconcile_date").Value = Nothing
+            sqlCommand.Parameters("@created_on").Value = DateTime.Now
+            sqlCommand.ExecuteNonQuery()
+
             For Each oItem As DataGridViewRow In DataGridViewOtherDeposit.Rows
                 ' Insert Detail
-
+                If oItem.Cells(0).Value = "" Then
+                    Continue For
+                End If
+                sql = "INSERT INTO other_deposit_detail(header_id,account_no,account_name,amount,memo,department,project,created_on) VALUES (@header_id,@acc_no,@desc_acc,@amount,@memo,@dep,@proj,@created_on)"
+                sqlCommand.CommandText = sql
+                sqlCommand.Parameters("@header_id").Value = ID
+                sqlCommand.Parameters("@acc_no").Value = oItem.Cells(0).Value
+                sqlCommand.Parameters("@desc_acc").Value = oItem.Cells(1).Value
+                sqlCommand.Parameters("@amount").Value = oItem.Cells(2).Value
+                sqlCommand.Parameters("@memo").Value = oItem.Cells(3).Value
+                sqlCommand.Parameters("@dep").Value = oItem.Cells(4).Value
+                sqlCommand.Parameters("@proj").Value = oItem.Cells(5).Value
+                sqlCommand.Parameters("@created_on").Value = DateTime.Now
+                sqlCommand.ExecuteNonQuery()
             Next
             transaction.Commit()
             con.Close()
             MessageBox.Show("Data has been saved", "Info Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            clearAllFIeld()
             Return 1
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -162,6 +231,24 @@ Public Class OtherDeposit
         End Try
         Return rowEffected
     End Function
+    Public Sub addItemToListDep(noAcc As String, descAcc As String)
+        Dim idx As Integer = DataGridViewOtherDeposit.RowCount
+        idx = idx - 1
+        If idx < 0 Then
+            MessageBox.Show("Please add row first before add items.")
+            Return
+        End If
+        DataGridViewOtherDeposit.Rows(idx).Cells(2).Selected = True
+        DataGridViewOtherDeposit.CurrentCell = Me.DataGridViewOtherDeposit(2, idx)
+        DataGridViewOtherDeposit.BeginEdit(True)
+        'DataGridViewPO.EndEdit()
+
+        DataGridViewOtherDeposit.Rows(idx).Cells(0).Value = noAcc
+        DataGridViewOtherDeposit.Rows(idx).Cells(1).Value = descAcc
+
+        DataGridViewOtherDeposit.Rows(idx).Cells(0).ReadOnly = True
+        DataGridViewOtherDeposit.Rows(idx).Cells(1).ReadOnly = True
+    End Sub
 
     Private Sub removeSeparator(txtBox As TextBox)
         Dim temp As String
@@ -187,7 +274,19 @@ Public Class OtherDeposit
 
     Private Sub DataGridViewOtherDeposit_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewOtherDeposit.CellDoubleClick
         If e.ColumnIndex = 0 Then
+            ListGlAccount.menuCalling = "OtherDeposit"
             ListGlAccount.Show()
+        End If
+    End Sub
+
+    Private Sub DataGridViewOtherDeposit_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewOtherDeposit.CellEndEdit
+        If e.ColumnIndex = 0 Then
+            ListGlAccount.menuCalling = "OtherDeposit"
+            ListGlAccount.Show()
+        ElseIf e.ColumnIndex = 2 Then
+
+            hitungTotalHarga(e.RowIndex)
+            formatKolomNumeric()
         End If
     End Sub
 
@@ -224,4 +323,11 @@ Public Class OtherDeposit
     End Sub
 
     
+    Private Sub DataGridViewOtherDeposit_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewOtherDeposit.EditingControlShowing
+        e.CellStyle.BackColor = Color.Aquamarine
+    End Sub
+
+    Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
+        txtAmount.Text = FormatNumber(txtAmount.Text.ToString, 0, TriState.True)
+    End Sub
 End Class
