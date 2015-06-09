@@ -60,3 +60,4 @@ D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.PurchasePaym
 D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.BankBook.resources
 D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.OtherDeposit.resources
 D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.ListGlAccount.resources
+D:\Personal\IT_Solution\Lcm\LcmApplication\obj\Debug\LcmApplication.OtherWithdrawal.resources

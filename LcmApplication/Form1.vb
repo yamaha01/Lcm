@@ -71,4 +71,8 @@
     Private Sub OtherDepositToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OtherDepositToolStripMenuItem1.Click
         openForm(OtherDeposit)
     End Sub
+
+    Private Sub OtherPaymentToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OtherPaymentToolStripMenuItem1.Click
+        openForm(OtherWithdrawal)
+    End Sub
 End Class

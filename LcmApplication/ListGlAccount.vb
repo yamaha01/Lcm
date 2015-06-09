@@ -77,7 +77,7 @@ Public Class ListGlAccount
         ElseIf menuCalling = "OtherWithdrawal" Then
             Dim rowIdx As Integer
             rowIdx = e.RowIndex
-            OtherDeposit.addItemToListDep(GridAccount.Rows(rowIdx).Cells(0).Value, GridAccount.Rows(rowIdx).Cells(1).Value)
+            OtherWithdrawal.addItemToListWith(GridAccount.Rows(rowIdx).Cells(0).Value, GridAccount.Rows(rowIdx).Cells(1).Value)
             Me.Close()
         End If
     End Sub

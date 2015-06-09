@@ -44,6 +44,11 @@ Public Class BankBook
         Dim sql As String
         Try
             ds = New DataSet()
+            Dim defaultdata As DataTable = New DataTable("bank")
+            defaultdata.Columns.Add("bank_id")
+            defaultdata.Columns.Add("bank_nm")
+            defaultdata.Rows.Add("-1", "All")
+            ds.Tables.Add(defaultdata)
             con = jokenconn()
             con.Open()
             sql = "select bank_id,bank_nm from bank order by bank_nm asc"
@@ -73,7 +78,9 @@ Public Class BankBook
         Try
             con = jokenconn()
             sql = "select bb.trx_date, bb.cheque_no,bb.source_no,bb.description,bb.bank_name,bb.deposit,bb.withdrawal,bb.balance, bb.reconcile_date,bb.created_on from bank_book bb where 1 = 1"
-            sql = sql + " and bb.bank_name = '" & CmbBank.SelectedValue & "'"
+            If CmbBank.SelectedValue <> "All" Then
+                sql = sql + " and bb.bank_name = '" & CmbBank.SelectedValue & "'"
+            End If
             sql = sql + " and bb.created_on BETWEEN @startDate AND @endDate"
             Logs.TraceLog("sqlQuery findBankBookByParam = " & sql, System.Reflection.MethodBase.GetCurrentMethod.Name())
             cmd.Connection = con
@@ -85,7 +92,7 @@ Public Class BankBook
             DataGridViewBankBook.Rows.Clear()
             DataGridViewBankBook.Refresh()
             If publictable.Rows.Count > 0 Then
-                Dim row As String()                
+                Dim row As String()
                 For Each oRecord As Object In publictable.Rows
                     row = New String() {oRecord("trx_date").ToString(), oRecord("source_no").ToString(), oRecord("cheque_no").ToString(), oRecord("description").ToString(), oRecord("deposit").ToString(), oRecord("withdrawal").ToString(), oRecord("balance").ToString(), oRecord("reconcile_date").ToString(), oRecord("created_on").ToString()}
                     DataGridViewBankBook.Rows.Add(row)

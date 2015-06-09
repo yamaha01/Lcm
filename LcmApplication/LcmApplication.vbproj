@@ -209,6 +209,12 @@
     <Compile Include="OtherDeposit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OtherWithdrawal.Designer.vb">
+      <DependentUpon>OtherWithdrawal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OtherWithdrawal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PoVO.vb" />
     <Compile Include="PurchasePayment.Designer.vb">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OtherDeposit.resx">
       <DependentUpon>OtherDeposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherWithdrawal.resx">
+      <DependentUpon>OtherWithdrawal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PurchasePayment.resx">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
