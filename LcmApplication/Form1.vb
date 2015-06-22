@@ -75,4 +75,12 @@
     Private Sub OtherPaymentToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OtherPaymentToolStripMenuItem1.Click
         openForm(OtherWithdrawal)
     End Sub
+
+    Private Sub SalesPaymentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesPaymentToolStripMenuItem.Click
+        openForm(ReportSalesByCustomer)
+    End Sub
+
+    Private Sub SalesByCustomerDetailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesByCustomerDetailToolStripMenuItem.Click
+        openForm(ReportSalesByCustomerDetail)
+    End Sub
 End Class

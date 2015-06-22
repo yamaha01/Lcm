@@ -56,6 +56,7 @@ Partial Class frmMainLcm
         Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PurchaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesPaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
@@ -64,6 +65,7 @@ Partial Class frmMainLcm
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnGeneralLedger = New System.Windows.Forms.Button()
+        Me.SalesByCustomerDetailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -271,7 +273,7 @@ Partial Class frmMainLcm
         '
         'ReportsToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesToolStripMenuItem, Me.PurchaseToolStripMenuItem1})
+        Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesToolStripMenuItem, Me.PurchaseToolStripMenuItem1, Me.SalesPaymentToolStripMenuItem, Me.SalesByCustomerDetailToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.ReportsToolStripMenuItem.Text = "&Reports"
@@ -279,14 +281,20 @@ Partial Class frmMainLcm
         'SalesToolStripMenuItem
         '
         Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
-        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
         Me.SalesToolStripMenuItem.Text = "&Sales"
         '
         'PurchaseToolStripMenuItem1
         '
         Me.PurchaseToolStripMenuItem1.Name = "PurchaseToolStripMenuItem1"
-        Me.PurchaseToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.PurchaseToolStripMenuItem1.Size = New System.Drawing.Size(204, 22)
         Me.PurchaseToolStripMenuItem1.Text = "P&urchase"
+        '
+        'SalesPaymentToolStripMenuItem
+        '
+        Me.SalesPaymentToolStripMenuItem.Name = "SalesPaymentToolStripMenuItem"
+        Me.SalesPaymentToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.SalesPaymentToolStripMenuItem.Text = "Sales By Customer"
         '
         'WindowsToolStripMenuItem
         '
@@ -355,6 +363,12 @@ Partial Class frmMainLcm
         Me.btnGeneralLedger.Text = "General Ledger"
         Me.btnGeneralLedger.UseVisualStyleBackColor = True
         '
+        'SalesByCustomerDetailToolStripMenuItem
+        '
+        Me.SalesByCustomerDetailToolStripMenuItem.Name = "SalesByCustomerDetailToolStripMenuItem"
+        Me.SalesByCustomerDetailToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.SalesByCustomerDetailToolStripMenuItem.Text = "Sales By Customer Detail"
+        '
         'frmMainLcm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -419,5 +433,7 @@ Partial Class frmMainLcm
     Friend WithEvents PurchasesPaymentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PurchasePaymentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PurchasePaymentToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalesPaymentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalesByCustomerDetailToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

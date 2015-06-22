@@ -180,6 +180,11 @@
     <Compile Include="FormReminders.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="lcmDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lcmDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ListGlAccount.Designer.vb">
       <DependentUpon>ListGlAccount.vb</DependentUpon>
     </Compile>
@@ -216,11 +221,41 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PoVO.vb" />
+    <Compile Include="PreviewPrint.Designer.vb">
+      <DependentUpon>PreviewPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewPrint.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PurchasePayment.Designer.vb">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
     </Compile>
     <Compile Include="PurchasePayment.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesByCustomer.Designer.vb">
+      <DependentUpon>ReportSalesByCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesByCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesByCustomerDetail.Designer.vb">
+      <DependentUpon>ReportSalesByCustomerDetail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesByCustomerDetail.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesByCustomer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesByCustomer.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesByCustomerDetail.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesByCustomerDetail.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SalesInvoices.Designer.vb">
       <DependentUpon>SalesInvoices.vb</DependentUpon>
@@ -288,8 +323,25 @@
     <EmbeddedResource Include="OtherWithdrawal.resx">
       <DependentUpon>OtherWithdrawal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PreviewPrint.resx">
+      <DependentUpon>PreviewPrint.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PurchasePayment.resx">
       <DependentUpon>PurchasePayment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesByCustomer.resx">
+      <DependentUpon>ReportSalesByCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesByCustomerDetail.resx">
+      <DependentUpon>ReportSalesByCustomerDetail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesByCustomer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SalesByCustomer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesByCustomerDetail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SalesByCustomerDetail.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInvoices.resx">
       <DependentUpon>SalesInvoices.vb</DependentUpon>
@@ -320,6 +372,17 @@
     </None>
     <None Include="dsSalesInvoicesListSummary.xss">
       <DependentUpon>dsSalesInvoicesListSummary.xsd</DependentUpon>
+    </None>
+    <None Include="lcmDataSet.xsc">
+      <DependentUpon>lcmDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="lcmDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>lcmDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="lcmDataSet.xss">
+      <DependentUpon>lcmDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
